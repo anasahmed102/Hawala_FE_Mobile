@@ -1,13 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:hawala/features/auth/prenstation/view/login_screen/pages/login_screen.dart';
+import 'package:hawala/navigation_page.dart';
 import 'package:hawala/service/connection_service.dart';
 import 'package:hawala/service/injection/injection.dart';
 import 'package:hawala/service/profile_notifier_service.dart';
 import 'package:hawala/service/validator_service.dart';
 import 'package:hawala/shared/logger.dart';
 import 'package:hawala/shared/responsive.dart';
-
 
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -37,10 +37,10 @@ class _SplashScreenState extends State<SplashScreen> {
       //     await getItClient<SecureStorageService>().firstTimeRead();
 
       if (ValidatorService.checkIsNullOrEmpty(
-          getItClient<ProfileNotifier>().userInfo?.token)) {
-        // child = const LoginPagee();
+          getItClient<ProfileNotifier>().userInfo?.access_token)) {
+        child = const LoginScreen();
       } else {
-        // child = const NavigationPage();
+        child = const NavigationPage();
       }
 
       if (mounted) {

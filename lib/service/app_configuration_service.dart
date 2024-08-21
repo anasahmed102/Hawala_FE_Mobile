@@ -196,7 +196,7 @@ class AppConfigurationService with ChangeNotifier {
 
   String accessToken() {
     try {
-      return userInfo?.token ?? '';
+      return userInfo?.access_token ?? '';
     } catch (e) {
       return 'string';
     }

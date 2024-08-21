@@ -8,9 +8,11 @@ import 'package:hawala/features/hawala/data/model/hawala.dart';
 import 'package:hawala/features/hawala/domain/reposiroey/hawala_repository.dart';
 import 'package:hawala/shared/enums.dart';
 import 'package:hawala/shared/logger.dart';
+import 'package:injectable/injectable.dart';
 
 part 'hawala_state.dart';
-
+@Named.from(HawalaCubit)
+@LazySingleton()
 class HawalaCubit extends Cubit<HawalaState> {
   HawalaCubit({
    required this.repository,

@@ -5,7 +5,6 @@ import 'package:hawala/features/customer/data/datasource/local_datasource.dart';
 import 'package:hawala/features/customer/data/datasource/remote_datasource.dart';
 import 'package:hawala/features/customer/data/model/customers.dart';
 import 'package:hawala/features/customer/domain/repository/customers_repository.dart';
-
 import 'package:hawala/service/connection_service.dart';
 import 'package:hawala/shared/enums.dart';
 import 'package:injectable/injectable.dart';
@@ -26,7 +25,8 @@ class HawalaRepositoryImpl extends CustomerRepository {
     DataSource dataSource = DataSource.checkNetwork,
     required CustomersModel data,
   }) {
-    return networkOperation.create(showMessage: showMessage, data: {});
+    return networkOperation.create(
+        showMessage: showMessage, customersModel: data);
   }
 
   @override
@@ -43,10 +43,8 @@ class HawalaRepositoryImpl extends CustomerRepository {
     if (source.isRemote) {
       final res = await networkOperation.getData(
           showMessage: showMessage, params: params);
-      res.fold(
-          (l) {},
-          (r) => localDataSource.addAll(
-              data: r, getId: (data) => data.id.toString()));
+      res.fold((l) {},
+          (r) => {localDataSource.addAll(data: r, getId: (data) => data.id)});
       return res;
     } else {
       return localDataSource.getData(showMessage: showMessage, params: params);

@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:hawala/core/dio/remote_data_source_abs.dart';
 import 'package:hawala/core/error/failures.dart';
 import 'package:hawala/features/customer/data/model/customers.dart';
-import 'package:hawala/features/hawala/data/model/hawala.dart';
 import 'package:hawala/localization/translate_keys.dart';
 import 'package:hawala/shared/enums.dart';
 import 'package:injectable/injectable.dart';
@@ -14,17 +13,16 @@ class CustomeraNetworkOperation {
   final CustomersModel Function(Map<String, dynamic>) fromJsonModel =
       CustomersModel.fromMap;
   CustomeraNetworkOperation({required this.networkOperation});
-  final String _endPoint = "/Currency";
-  final String _name = Trans.currency;
-  final String _names = Trans.currency;
-  Future<Either<Failure, CustomersModel?>> create({
-    required Map<String, dynamic> data,
-    required ShowMessageEnum showMessage,
-  }) {
+  final String _endPoint = "/customer";
+  final String _name = Trans.customer;
+  final String _names = Trans.customer;
+  Future<Either<Failure, CustomersModel?>> create(
+      {required ShowMessageEnum showMessage,
+      required CustomersModel customersModel}) {
     return networkOperation.create<CustomersModel>(
         endPoint: _endPoint,
         fromJsonModel: fromJsonModel,
-        data: data,
+        data: {"CustomerName": customersModel.customerName,"Phone":customersModel.phone},
         showMessage: showMessage,
         name: _name);
   }
@@ -43,7 +41,7 @@ class CustomeraNetworkOperation {
     return await networkOperation.getData<CustomersModel>(
       fromJsonModel: fromJsonModel,
       endPoint: _endPoint,
-      parseBody: ParseBody.row,
+      parseBody: ParseBody.direct,
       params: params,
       name: _names,
       showMessage: showMessage,

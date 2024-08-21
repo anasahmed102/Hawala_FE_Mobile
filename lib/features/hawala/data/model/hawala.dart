@@ -1,83 +1,74 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:hawala/features/hawala/data/model/hawala_customer.dart';
+
 class HawalaModel {
   final int id;
-  final String name;
-  final String type;
-  final String currency;
-  final String allPaid;
-  final DateTime postingDate;
-  final String customerName;
-  final String amount;
-  final String partial;
-  final String paidAtOnce;
+  final Customer customer;
+  final int type;
+  final int currency;
+  final bool fullPaid;
+  final String postingDate;
+  final int paidAmount;
+  final int totalAmount;
+
   HawalaModel({
     required this.id,
-    required this.name,
+    required this.customer,
     required this.type,
     required this.currency,
-    required this.allPaid,
+    required this.fullPaid,
     required this.postingDate,
-    required this.customerName,
-    required this.amount,
-    required this.partial,
-    required this.paidAtOnce,
+    required this.paidAmount,
+    required this.totalAmount,
   });
 
   HawalaModel copyWith({
     int? id,
-    String? name,
-    String? type,
-    String? currency,
-    String? allPaid,
-    DateTime? postingDate,
-    String? customerName,
-    String? amount,
-    String? partial,
-    String? paidAtOnce,
+    Customer? customer,
+    int? type,
+    int? currency,
+    bool? fullPaid,
+    String? postingDate,
+    int? paidAmount,
+    int? totalAmount,
   }) {
     return HawalaModel(
       id: id ?? this.id,
-      name: name ?? this.name,
+      customer: customer ?? this.customer,
       type: type ?? this.type,
       currency: currency ?? this.currency,
-      allPaid: allPaid ?? this.allPaid,
+      fullPaid: fullPaid ?? this.fullPaid,
       postingDate: postingDate ?? this.postingDate,
-      customerName: customerName ?? this.customerName,
-      amount: amount ?? this.amount,
-      partial: partial ?? this.partial,
-      paidAtOnce: paidAtOnce ?? this.paidAtOnce,
+      paidAmount: paidAmount ?? this.paidAmount,
+      totalAmount: totalAmount ?? this.totalAmount,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'name': name,
-      'type': type,
-      'currency': currency,
-      'allPaid': allPaid,
-      'postingDate': postingDate.millisecondsSinceEpoch,
-      'customerName': customerName,
-      'amount': amount,
-      'partial': partial,
-      'paidAtOnce': paidAtOnce,
+      'Customer': customer.toMap(),
+      'Type': type,
+      'Currency': currency,
+      'FullPaid': fullPaid,
+      'PostingDate': postingDate,
+      'PaidAmount': paidAmount,
+      'TotalAmount': totalAmount,
     };
   }
 
   factory HawalaModel.fromMap(Map<String, dynamic> map) {
     return HawalaModel(
       id: map['id'] as int,
-      name: map['name'] as String,
-      type: map['type'] as String,
-      currency: map['currency'] as String,
-      allPaid: map['allPaid'] as String,
-      postingDate: DateTime.fromMillisecondsSinceEpoch(map['postingDate'] as int),
-      customerName: map['customerName'] as String,
-      amount: map['amount'] as String,
-      partial: map['partial'] as String,
-      paidAtOnce: map['paidAtOnce'] as String,
+      customer: Customer.fromMap(map['Customer'] as Map<String, dynamic>),
+      type: map['Type'] as int,
+      currency: map['Currency'] as int,
+      fullPaid: map['FullPaid'] as bool,
+      postingDate: (map['PostingDate'] as String),
+      paidAmount: map['PaidAmount'] as int,
+      totalAmount: map['TotalAmount'] as int,
     );
   }
 
@@ -88,37 +79,32 @@ class HawalaModel {
 
   @override
   String toString() {
-    return 'Hawala(id: $id, name: $name, type: $type, currency: $currency, allPaid: $allPaid, postingDate: $postingDate, customerName: $customerName, amount: $amount, partial: $partial, paidAtOnce: $paidAtOnce)';
+    return 'HawalaModel(id: $id, customer: $customer, type: $type, currency: $currency, fullPaid: $fullPaid, postingDate: $postingDate, paidAmount: $paidAmount, totalAmount: $totalAmount)';
   }
 
   @override
   bool operator ==(covariant HawalaModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.name == name &&
-      other.type == type &&
-      other.currency == currency &&
-      other.allPaid == allPaid &&
-      other.postingDate == postingDate &&
-      other.customerName == customerName &&
-      other.amount == amount &&
-      other.partial == partial &&
-      other.paidAtOnce == paidAtOnce;
+
+    return other.id == id &&
+        other.customer == customer &&
+        other.type == type &&
+        other.currency == currency &&
+        other.fullPaid == fullPaid &&
+        other.postingDate == postingDate &&
+        other.paidAmount == paidAmount &&
+        other.totalAmount == totalAmount;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      name.hashCode ^
-      type.hashCode ^
-      currency.hashCode ^
-      allPaid.hashCode ^
-      postingDate.hashCode ^
-      customerName.hashCode ^
-      amount.hashCode ^
-      partial.hashCode ^
-      paidAtOnce.hashCode;
+        customer.hashCode ^
+        type.hashCode ^
+        currency.hashCode ^
+        fullPaid.hashCode ^
+        postingDate.hashCode ^
+        paidAmount.hashCode ^
+        totalAmount.hashCode;
   }
 }

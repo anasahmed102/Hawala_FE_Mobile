@@ -8,7 +8,7 @@ import 'package:hawala/shared/context_extension.dart';
 
 
 Future<bool> getUserConfirm(
-    {String? content, bool onNullReturn = false, required String desc}) async {
+    {String? content, bool onNullReturn = false, required String desc,required VoidCallback onPressed}) async {
   bool source = onNullReturn;
   BuildContext context = getItClient<AppConfigurationService>().context;
   await AwesomeDialog(
@@ -26,7 +26,7 @@ Future<bool> getUserConfirm(
       btnOkText: "Yes",
       btnCancelText: "Cancel",
       btnCancelOnPress: () {},
-      btnOkOnPress: () {},
+      btnOkOnPress: onPressed,
       autoDismiss: false,
       dismissOnBackKeyPress: true,
       onDismissCallback: (dismissType) {

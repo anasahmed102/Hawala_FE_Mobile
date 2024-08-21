@@ -3,41 +3,10 @@ class DataBaseTables {
   static String sellOrdersTable = "SellOrders";
   static String invoicesTable = "Invoices";
   static String paymentTermTemplateTable = "paymentTermTemplateTable";
-  static String itemsTable = "Items";
   static String localDailySalesReport = "LocalDailySalesReport";
   static String currencyExchangeTable = "CurrencyExchange";
   static String currencyDefaultTable = "CurrencyDefault";
   static String pricingListTable = "PricingList";
-  static String currencyTable = "currency";
-  static String itemGroupsTable = "ItemGroups";
-  static String territoryTable = "territory";
-  static String localTemoSellOrder = "LocalTemoSellOrder";
-  static String customerGroupTable = "customerGroup";
-  static String customerTable = "Customers";
-  static String allCustomerTable = "allCustomerTable";
-  static String oldSellOrders = "OldSellOrders";
-  static String oldPaymentOrders = "OldPaymentOrders";
-  static String permissionsTable = "permissionsTable";
-  static String taxesAndChargesTable = "taxesAndChargesTable";
-  static String localCreatedVisits = "LocalCreatedVisits";
-  static String localCreatedCustomers = "LocalCreatedCustomers";
-  static String localLocalPayments = "LocalPayments";
-  static String warehoueorderTable = "warehoueorderTable";
-  static String tripsTable = "tripsTable";
-  static String asiggnedworkOuts = "ASIGNEDWORKOUTSTABLE";
-  static String workOutPlans = "WORKOUTSPLANSTABLE";
-  static String stafworkOuts = "STAFWORKOUTSTABLE";
-  static String donedworkOuts = "DONEDWORKOUTSTABLE";
-  static String netritions = "NETRITIONSTABLE";
-  static String donednetritions = "DONEDNETRITIONSTABLE";
-  static String trainees = "TRAINEES";
-  static String traineesWorkouts = "TRAINEES_WORKOUTS";
-  static String userAcitvity = "USERACTIVITY";
-  static String prepareOrderTable = "prepareOrderTable";
-  static String saleRepsTable = "saleRepsTable";
-  static String targetTable = "targetTable";
-  static String eachTargetTable = "eachTargetTable";
-  static String uomTable = "uomTable";
-  static String visitRouteTable = "visitRouteTable";
-  static String staffTable = "staffTable";
+  
+
 }

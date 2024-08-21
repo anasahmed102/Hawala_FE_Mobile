@@ -2,6 +2,7 @@
 import 'package:hawala/localization/translate_keys.dart';
 import 'package:hawala/shared/logger.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 
 
 
@@ -59,6 +60,19 @@ class DateFormatterService {
       return "";
     }
   }
+
+  String getStartOfDayUTC(DateTime date) {
+    DateTime startOfDay =
+        DateTime.utc(date.year, date.month, date.day, 0, 0, 0);
+    return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(startOfDay);
+  }
+
+  String getEndOfDayUTC(DateTime date) {
+    DateTime endOfDay =
+        DateTime.utc(date.year, date.month, date.day, 23, 59, 59, 999);
+    return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(endOfDay);
+  }
+
 
   static String getOnlyDate(DateTime? date) {
     if (date == null) {

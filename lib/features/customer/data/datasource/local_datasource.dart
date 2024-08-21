@@ -6,7 +6,6 @@ import 'package:hawala/core/helper/database_filter.dart';
 import 'package:hawala/core/local_data_source/local_data_source_impl.dart';
 import 'package:hawala/core/local_data_source/local_database/database_class.dart';
 import 'package:hawala/features/customer/data/model/customers.dart';
-import 'package:hawala/features/hawala/data/model/hawala.dart';
 import 'package:hawala/localization/translate_keys.dart';
 import 'package:hawala/shared/enums.dart';
 import 'package:injectable/injectable.dart';
@@ -14,10 +13,10 @@ import 'package:injectable/injectable.dart';
 @Named.from(CustomersLocalOperation)
 @Injectable()
 class CustomersLocalOperation {
-  static String tableName = DataBaseTables.currencyTable;
+  static String tableName = DataBaseTables.currencyDefaultTable;
   final LocalDataSourceImp localOperation;
-  final String _name = Trans.currency;
-  final String _names = Trans.currency;
+  final String _name = Trans.customer;
+  final String _names = Trans.customer;
   final CustomersModel Function(Map<String, dynamic>) fromJsonModel =
       CustomersModel.fromMap;
   CustomersLocalOperation({required this.localOperation});
@@ -98,7 +97,7 @@ class CustomersLocalOperation {
     bool deleteOldRecord = true,
     required List<CustomersModel> data,
     ShowMessageEnum showMessage = ShowMessageEnum.none,
-    required String Function(CustomersModel) getId,
+    required int? Function(CustomersModel) getId,
   }) async {
     return localOperation.addAll<CustomersModel>(
         deleteOldRecord: deleteOldRecord,

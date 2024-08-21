@@ -13,7 +13,7 @@ class LocalTempSellOrder {
   final String _astDateKey = "LastDateKey";
 
   final SharedPreferences preferences;
-  final store = stringMapStoreFactory.store(DataBaseTables.localTemoSellOrder);
+  final store = stringMapStoreFactory.store(DataBaseTables.currencyExchangeTable);
 
   LocalTempSellOrder({required this.preferences});
   Future puts(Map<String, List> data) async {

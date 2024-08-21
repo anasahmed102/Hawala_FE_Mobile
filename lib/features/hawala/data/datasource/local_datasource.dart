@@ -13,7 +13,7 @@ import 'package:injectable/injectable.dart';
 @Named.from(HawalaLocalOperation)
 @Injectable()
 class HawalaLocalOperation {
-  static String tableName = DataBaseTables.currencyTable;
+  static String tableName = DataBaseTables.currencyExchangeTable;
   final LocalDataSourceImp localOperation;
   final String _name = Trans.currency;
   final String _names = Trans.currency;

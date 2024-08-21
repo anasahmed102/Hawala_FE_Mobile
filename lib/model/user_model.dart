@@ -2,28 +2,28 @@
 import 'dart:convert';
 
 class UserAppModel {
-  final String token;
+  final String access_token;
   UserAppModel({
-    required this.token,
+    required this.access_token,
   });
 
   UserAppModel copyWith({
-    String? token,
+    String? access_token,
   }) {
     return UserAppModel(
-      token: token ?? this.token,
+      access_token: access_token ?? this.access_token,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'token': token,
+      'access_token': access_token,
     };
   }
 
   factory UserAppModel.fromMap(Map<String, dynamic> map) {
     return UserAppModel(
-      token: map['token'] as String,
+      access_token: map['access_token'] as String,
     );
   }
 
@@ -33,15 +33,16 @@ class UserAppModel {
       UserAppModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'UserAppModel(token: $token)';
+  String toString() => 'UserAppModel(access_token: $access_token)';
 
   @override
   bool operator ==(covariant UserAppModel other) {
     if (identical(this, other)) return true;
-
-    return other.token == token;
+  
+    return 
+      other.access_token == access_token;
   }
 
   @override
-  int get hashCode => token.hashCode;
+  int get hashCode => access_token.hashCode;
 }

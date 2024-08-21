@@ -13,7 +13,7 @@ class HawalaNetworkOperation {
   final HawalaModel Function(Map<String, dynamic>) fromJsonModel =
       HawalaModel.fromMap;
   HawalaNetworkOperation({required this.networkOperation});
-  final String _endPoint = "/Currency";
+  final String _endPoint = "/hawala";
   final String _name = Trans.currency;
   final String _names = Trans.currency;
   Future<Either<Failure, HawalaModel?>> create({
@@ -35,14 +35,15 @@ class HawalaNetworkOperation {
     );
   }
 
-  Future<Either<Failure, List<HawalaModel>>> getData({
-    required Map<String, dynamic> params,
-    required ShowMessageEnum showMessage,
-  }) async {
+  Future<Either<Failure, List<HawalaModel>>> getData(
+      {required Map<String, dynamic> params,
+      required ShowMessageEnum showMessage,
+      required String startDate,
+      required String endDate}) async {
     return await networkOperation.getData<HawalaModel>(
       fromJsonModel: fromJsonModel,
-      endPoint: _endPoint,
-      parseBody: ParseBody.row,
+      endPoint: "$_endPoint?fromDate=$startDate&toDate=$endDate",
+      parseBody: ParseBody.direct,
       params: params,
       name: _names,
       showMessage: showMessage,

@@ -6,12 +6,15 @@ import 'package:hawala/features/hawala/data/datasource/remote_datasource.dart';
 import 'package:hawala/features/hawala/data/model/hawala.dart';
 import 'package:hawala/features/hawala/domain/reposiroey/hawala_repository.dart';
 import 'package:hawala/service/connection_service.dart';
+import 'package:hawala/service/data_formatting_service.dart';
+import 'package:hawala/service/injection/injection.dart';
 import 'package:hawala/shared/enums.dart';
 import 'package:injectable/injectable.dart';
 
 @Named.from(HawalaRepositoryImpl)
 @Injectable(as: HawalaRepository)
 class HawalaRepositoryImpl extends HawalaRepository {
+  DateTime now = DateTime.now();
   final HawalaNetworkOperation networkOperation;
   final HawalaLocalOperation localDataSource;
   final ConnectionChecker networkInfo;
@@ -41,9 +44,14 @@ class HawalaRepositoryImpl extends HawalaRepository {
     final source = await makeDecision(dataSource);
     if (source.isRemote) {
       final res = await networkOperation.getData(
-          showMessage: showMessage, params: params);
-      res.fold((l) {},
-          (r) => localDataSource.addAll(data: r, getId: (data) => data.id.toString()));
+          showMessage: showMessage,
+          params: params,
+          endDate: getItClient<DateFormatterService>().getEndOfDayUTC(now),
+          startDate: getItClient<DateFormatterService>().getStartOfDayUTC(now));
+      res.fold(
+          (l) {},
+          (r) => localDataSource.addAll(
+              data: r, getId: (data) => data.id.toString()));
       return res;
     } else {
       return localDataSource.getData(showMessage: showMessage, params: params);

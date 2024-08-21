@@ -1,10 +1,11 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hawala/features/auth/prenstation/cubit/auth_cubit.dart';
-import 'package:hawala/features/auth/prenstation/view/home_page/pages/home_page.dart';
+import 'package:hawala/features/customer/presentation/cubit/cubit/add_update_delete_customer_cubit.dart';
+import 'package:hawala/features/customer/presentation/cubit/customers_cubit.dart';
+import 'package:hawala/features/hawala/presentation/cubit/hawala_cubit.dart';
 import 'package:hawala/firebase_options.dart';
 import 'package:hawala/initilize.dart';
 import 'package:hawala/localization/localizations_consttansts.dart';
@@ -14,8 +15,8 @@ import 'package:hawala/service/injection/injection.dart';
 import 'package:hawala/service/profile_notifier_service.dart';
 import 'package:hawala/shared/logger.dart';
 import 'package:hawala/shared/responsive.dart';
+import 'package:hawala/splash_screen.dart';
 import 'package:hawala/theme/app_theme.dart';
-
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
               darkTheme: ThemeApp.darkTheme(),
               debugShowCheckedModeBanner: false,
               navigatorKey: getItClient<AppConfigurationService>().navigatorKey,
-              // home: const HomePage(),
+              home: const SplashScreen(),
               builder: (context, child) {
                 Responsive.init(
                   context,
@@ -66,6 +67,12 @@ class MyApp extends StatelessWidget {
     return [
       BlocProvider<AuthCubit>(
           create: (BuildContext context) => getItClient<AuthCubit>()),
+      BlocProvider<CustomersCubit>(
+          create: (BuildContext context) => getItClient<CustomersCubit>()),
+      BlocProvider<AddUpdateDeleteCustomerCubit>(
+          create: (BuildContext context) => getItClient<AddUpdateDeleteCustomerCubit>()),
+      BlocProvider<HawalaCubit>(
+          create: (BuildContext context) => getItClient<HawalaCubit>()),
     ];
   }
 

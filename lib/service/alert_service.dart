@@ -1,5 +1,5 @@
 
-import 'package:flutter/material.dart' show BuildContext;
+import 'package:flutter/material.dart' show BuildContext, VoidCallback;
 import 'package:hawala/alerts/failed_alert.dart';
 import 'package:hawala/alerts/get_user_confirm.dart';
 import 'package:hawala/alerts/login_status.dart';
@@ -22,8 +22,9 @@ class AlertService {
       failedAlert(error: error, onOkClicked: onOkClicked, title: title);
 
   static Future<bool> userConfirm(
-          {String? content, bool onNullReturn = false}) =>
+          {required VoidCallback onPressed, String? content, bool onNullReturn = false}) =>
       getUserConfirm(
+        onPressed: onPressed,
           content: content, onNullReturn: onNullReturn, desc: "alert_service");
 
   static Future<void> success({required String message}) =>

@@ -1,22 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class CustomersModel {
-  final int? id;
+class Customer {
+  final int id;
   final String customerName;
   final String phone;
-  CustomersModel({
-    this.id,
+  Customer({
+    required this.id,
     required this.customerName,
     required this.phone,
   });
 
-  CustomersModel copyWith({
+  Customer copyWith({
     int? id,
     String? customerName,
     String? phone,
   }) {
-    return CustomersModel(
+    return Customer(
       id: id ?? this.id,
       customerName: customerName ?? this.customerName,
       phone: phone ?? this.phone,
@@ -31,9 +31,9 @@ class CustomersModel {
     };
   }
 
-  factory CustomersModel.fromMap(Map<String, dynamic> map) {
-    return CustomersModel(
-      id: map['id'] != null ? map['id'] as int : null,
+  factory Customer.fromMap(Map<String, dynamic> map) {
+    return Customer(
+      id: map['id'] as int,
       customerName: map['CustomerName'] as String,
       phone: map['Phone'] as String,
     );
@@ -41,15 +41,15 @@ class CustomersModel {
 
   String toJson() => json.encode(toMap());
 
-  factory CustomersModel.fromJson(String source) =>
-      CustomersModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Customer.fromJson(String source) =>
+      Customer.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() =>
-      'CustomersModel(id: $id, CustomerName: $customerName, Phone: $phone)';
+      'Customer(id: $id, customerName: $customerName, phone: $phone)';
 
   @override
-  bool operator ==(covariant CustomersModel other) {
+  bool operator ==(covariant Customer other) {
     if (identical(this, other)) return true;
 
     return other.id == id &&

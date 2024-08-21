@@ -39,3 +39,9 @@ class EmptyData extends Failure {
   @override
   List<Object?> get props => [error];
 }
+class OfflineFailure extends Failure {
+  const OfflineFailure({required super.error});
+
+  @override
+  List<Object?> get props => [error];
+}
