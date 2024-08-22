@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hawala/features/auth/prenstation/cubit/auth_cubit.dart';
 import 'package:hawala/features/customer/presentation/cubit/cubit/add_update_delete_customer_cubit.dart';
 import 'package:hawala/features/customer/presentation/cubit/customers_cubit.dart';
+import 'package:hawala/features/hawala/presentation/cubit/cubit/hawala_add_update_delete_cubit.dart';
 import 'package:hawala/features/hawala/presentation/cubit/hawala_cubit.dart';
 import 'package:hawala/firebase_options.dart';
 import 'package:hawala/initilize.dart';
@@ -70,9 +71,13 @@ class MyApp extends StatelessWidget {
       BlocProvider<CustomersCubit>(
           create: (BuildContext context) => getItClient<CustomersCubit>()),
       BlocProvider<AddUpdateDeleteCustomerCubit>(
-          create: (BuildContext context) => getItClient<AddUpdateDeleteCustomerCubit>()),
+          create: (BuildContext context) =>
+              getItClient<AddUpdateDeleteCustomerCubit>()),
       BlocProvider<HawalaCubit>(
           create: (BuildContext context) => getItClient<HawalaCubit>()),
+      BlocProvider<HawalaAddUpdateDeleteCubit>(
+          create: (BuildContext context) =>
+              getItClient<HawalaAddUpdateDeleteCubit>()),
     ];
   }
 

@@ -28,7 +28,15 @@ class HawalaRepositoryImpl extends HawalaRepository {
     DataSource dataSource = DataSource.checkNetwork,
     required HawalaModel data,
   }) {
-    return networkOperation.create(showMessage: showMessage, data: {});
+    return networkOperation.create(showMessage: showMessage, data: {
+      "Type": data.type,
+      "customerId": data.customerId,
+      "Currency": data.currency,
+      "FullPaid": data.fullPaid,
+      "PostingDate": data.postingDate,
+      "TotalAmount": data.totalAmount,
+      "PaidAmount": data.paidAmount
+    });
   }
 
   @override

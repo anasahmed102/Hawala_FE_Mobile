@@ -72,6 +72,10 @@ class DateFormatterService {
         DateTime.utc(date.year, date.month, date.day, 23, 59, 59, 999);
     return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(endOfDay);
   }
+  String getCurrentDateTimeUTC() {
+    DateTime now = DateTime.now().toUtc();
+    return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(now);
+  }
 
 
   static String getOnlyDate(DateTime? date) {

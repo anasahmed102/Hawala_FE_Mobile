@@ -41,7 +41,6 @@ class _CustomerWidgetState extends State<CustomerWidget> {
         SizedBox(
           height: 60.h,
         ),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,6 +145,7 @@ class _CustomerWidgetState extends State<CustomerWidget> {
           itemCount: widget.model.length,
           itemBuilder: (context, index) {
             return ListTile(
+                subtitle: Text(widget.model[index].phone),
                 leading: Text(widget.model[index].id.toString()),
                 title: Text(widget.model[index].customerName),
                 trailing: Expanded(
@@ -256,25 +256,6 @@ class _CustomerWidgetState extends State<CustomerWidget> {
                 ));
           },
         ),
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        //   child: DropdownButton<CustomersModel>(
-        //     hint: const Text('Select a customer'),
-        //     value: selectedCustomer,
-        //     items: widget.customers.map((CustomersModel customer) {
-        //       return DropdownMenuItem<CustomersModel>(
-        //         value: customer,
-        //         child: Text(customer.customerName),
-        //       );
-        //     }).toList(),
-        //     onChanged: (CustomersModel? newValue) {
-        //       setState(() {
-        //         selectedCustomer = newValue;
-        //       });
-        //     },
-        //     isExpanded: true,
-        //   ),
-        // ),
       ],
     );
   }
@@ -282,7 +263,7 @@ class _CustomerWidgetState extends State<CustomerWidget> {
   @override
   void initState() {
     _username = TextEditingController();
-    _phoneNumber=TextEditingController();
+    _phoneNumber = TextEditingController();
     super.initState();
   }
 }

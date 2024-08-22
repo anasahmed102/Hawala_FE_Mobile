@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       if (ValidatorService.checkIsNullOrEmpty(
           getItClient<ProfileNotifier>().userInfo?.access_token)) {
-        child = const LoginScreen();
+        child = const LoginPage();
       } else {
         child = const NavigationPage();
       }

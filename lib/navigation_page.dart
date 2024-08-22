@@ -9,6 +9,8 @@ import 'package:hawala/service/profile_notifier_service.dart';
 import 'package:hawala/shared/context_extension.dart';
 import 'package:hawala/shared/enums.dart';
 import 'package:hawala/shared/responsive.dart';
+import 'package:hawala/views/pages/add_hawala.dart';
+import 'package:hawala/views/pages/hawalaw_add_state.dart';
 
 late TextEditingController _username;
 
@@ -48,68 +50,7 @@ class _NavigationPageState extends State<NavigationPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // showDialog(
-          //   context: context,
-          //   builder: (_) => AlertDialog(
-          //     title: const Text("Add Todo"),
-          //     content: Column(
-          //       mainAxisSize: MainAxisSize.min,
-          //       children: [
-          //         Padding(
-          //           padding: const EdgeInsets.all(8.0),
-          //           child: TextField(
-          //             controller: _username,
-          //             decoration: const InputDecoration(
-          //                 border: OutlineInputBorder(
-          //                     borderRadius:
-          //                         BorderRadius.all(Radius.circular(16))),
-          //                 filled: true,
-          //                 prefixIcon: Icon(
-          //                   Icons.task,
-          //                 ),
-          //                 labelText: "Todo name"),
-          //           ),
-          //         ),
-          //         SizedBox(
-          //           width: MediaQuery.of(context).size.width * 0.24,
-          //           child: MaterialButton(
-          //             color: Colors.amber,
-          //             onPressed: () {
-          //               final model =
-          //                   CustomersModel(customerName: _username.text);
-          //               getItClient<AddUpdateDeleteCustomerCubit>()
-          //                   .addCustomer(model);
-          //               // if (_username.text.isEmpty) return;
-          //               // setState(() {
-          //               //   _username.text = "";
-          //               // });
-          //               // Navigator.pop(context);
-          //             },
-          //             child: const Center(
-          //               child: Row(
-          //                 mainAxisAlignment: MainAxisAlignment.center,
-          //                 crossAxisAlignment: CrossAxisAlignment.center,
-          //                 children: [
-          //                   Icon(
-          //                     Icons.add,
-          //                     color: Colors.white,
-          //                   ),
-          //                   SizedBox(
-          //                     width: 10,
-          //                   ),
-          //                   Text(
-          //                     "Add",
-          //                     style: TextStyle(color: Colors.white),
-          //                   ),
-          //                 ],
-          //               ),
-          //             ),
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // );
+     Navigator.push(context, MaterialPageRoute(builder: (_)=> HawalaAddListWidget()));
         },
         child: const Icon(
           Icons.add,

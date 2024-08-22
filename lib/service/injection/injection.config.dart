@@ -44,13 +44,15 @@ import 'package:hawala/features/hawala/data/repository/impl_repository.dart'
     as _i32;
 import 'package:hawala/features/hawala/domain/reposiroey/hawala_repository.dart'
     as _i31;
+import 'package:hawala/features/hawala/presentation/cubit/cubit/hawala_add_update_delete_cubit.dart'
+    as _i38;
 import 'package:hawala/features/hawala/presentation/cubit/hawala_cubit.dart'
     as _i37;
 import 'package:hawala/service/alert_service.dart' as _i13;
 import 'package:hawala/service/app_configuration_service.dart' as _i27;
 import 'package:hawala/service/connection_service.dart' as _i11;
 import 'package:hawala/service/data_formatting_service.dart' as _i8;
-import 'package:hawala/service/injection/app_moudle.dart' as _i38;
+import 'package:hawala/service/injection/app_moudle.dart' as _i39;
 import 'package:hawala/service/luncher_service.dart' as _i7;
 import 'package:hawala/service/permission/camera_permission_service.dart'
     as _i17;
@@ -151,8 +153,11 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i36.AuthCubit(gh<_i34.AuthRepository>()));
     gh.lazySingleton<_i37.HawalaCubit>(
         () => _i37.HawalaCubit(repository: gh<_i31.HawalaRepository>()));
+    gh.lazySingleton<_i38.HawalaAddUpdateDeleteCubit>(() =>
+        _i38.HawalaAddUpdateDeleteCubit(
+            hawalaRepository: gh<_i31.HawalaRepository>()));
     return this;
   }
 }
 
-class _$AppModule extends _i38.AppModule {}
+class _$AppModule extends _i39.AppModule {}

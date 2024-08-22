@@ -4,8 +4,9 @@ import 'dart:convert';
 import 'package:hawala/features/hawala/data/model/hawala_customer.dart';
 
 class HawalaModel {
-  final int id;
-  final Customer customer;
+  final int? id;
+  final int customerId;
+  final Customer? customer;
   final int type;
   final int currency;
   final bool fullPaid;
@@ -14,8 +15,9 @@ class HawalaModel {
   final int totalAmount;
 
   HawalaModel({
-    required this.id,
-    required this.customer,
+     this.id,
+    required this.customerId,
+     this.customer,
     required this.type,
     required this.currency,
     required this.fullPaid,
@@ -27,6 +29,7 @@ class HawalaModel {
   HawalaModel copyWith({
     int? id,
     Customer? customer,
+    int? customerId,
     int? type,
     int? currency,
     bool? fullPaid,
@@ -38,6 +41,7 @@ class HawalaModel {
       id: id ?? this.id,
       customer: customer ?? this.customer,
       type: type ?? this.type,
+      customerId: customerId ?? this.customerId,
       currency: currency ?? this.currency,
       fullPaid: fullPaid ?? this.fullPaid,
       postingDate: postingDate ?? this.postingDate,
@@ -49,19 +53,21 @@ class HawalaModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'Customer': customer.toMap(),
+      'Customer': customer!.toMap(),
       'Type': type,
       'Currency': currency,
       'FullPaid': fullPaid,
       'PostingDate': postingDate,
       'PaidAmount': paidAmount,
       'TotalAmount': totalAmount,
+      'customerId': customerId
     };
   }
 
   factory HawalaModel.fromMap(Map<String, dynamic> map) {
     return HawalaModel(
       id: map['id'] as int,
+      customerId: map['customerId'] as int,
       customer: Customer.fromMap(map['Customer'] as Map<String, dynamic>),
       type: map['Type'] as int,
       currency: map['Currency'] as int,
@@ -79,7 +85,7 @@ class HawalaModel {
 
   @override
   String toString() {
-    return 'HawalaModel(id: $id, customer: $customer, type: $type, currency: $currency, fullPaid: $fullPaid, postingDate: $postingDate, paidAmount: $paidAmount, totalAmount: $totalAmount)';
+    return 'HawalaModel(id: $id, customer: $customer, type: $type, currency: $currency, fullPaid: $fullPaid, postingDate: $postingDate, paidAmount: $paidAmount, totalAmount: $totalAmount, customerId: $customerId)';
   }
 
   @override
