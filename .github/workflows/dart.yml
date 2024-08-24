@@ -12,11 +12,10 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.6' # Specify the Flutter version you need
           channel: 'stable'
           architecture: x64
-
       - run: flutter pub get
+      
 
       - run: pod repo update
         working-directory: ios
