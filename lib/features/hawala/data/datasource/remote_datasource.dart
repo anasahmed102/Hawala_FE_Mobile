@@ -38,8 +38,8 @@ class HawalaNetworkOperation {
   Future<Either<Failure, List<HawalaModel>>> getData(
       {required Map<String, dynamic> params,
       required ShowMessageEnum showMessage,
-      required String startDate,
-      required String endDate}) async {
+      required String? startDate,
+      required String? endDate}) async {
     return await networkOperation.getData<HawalaModel>(
       fromJsonModel: fromJsonModel,
       endPoint: "$_endPoint?fromDate=$startDate&toDate=$endDate",

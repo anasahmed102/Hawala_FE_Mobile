@@ -17,7 +17,7 @@ class HawalaModel {
   HawalaModel({
      this.id,
     required this.customerId,
-     this.customer,
+    this.customer,
     required this.type,
     required this.currency,
     required this.fullPaid,

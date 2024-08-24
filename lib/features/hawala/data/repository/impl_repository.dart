@@ -48,14 +48,16 @@ class HawalaRepositoryImpl extends HawalaRepository {
   Future<Either<Failure, List<HawalaModel>>> getAll(
       {Map<String, dynamic> params = const {},
       ShowMessageEnum showMessage = ShowMessageEnum.none,
-      required DataSource dataSource}) async {
+      
+      required DataSource dataSource, required String startDate,
+      required String endDate}) async {
     final source = await makeDecision(dataSource);
     if (source.isRemote) {
       final res = await networkOperation.getData(
           showMessage: showMessage,
           params: params,
-          endDate: getItClient<DateFormatterService>().getEndOfDayUTC(now),
-          startDate: getItClient<DateFormatterService>().getStartOfDayUTC(now));
+          endDate: endDate,
+          startDate: startDate);
       res.fold(
           (l) {},
           (r) => localDataSource.addAll(

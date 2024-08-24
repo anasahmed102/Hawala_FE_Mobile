@@ -22,7 +22,7 @@ class SecureStorageService {
   // WorkerInfo? workerInfo;
 
   // String lang = "ku";
-  // bool isDarkMode = true;
+  bool isDarkMode = true;
   // bool viewOrder = true;
   // bool isList = true;
   // bool primaryTheme = true;
@@ -40,8 +40,8 @@ class SecureStorageService {
       await getList();
       await getTheme();
       await getPrimaryColor();
-      // await getUserData();
-      // await getMode();
+      await getUserData();
+      await getMode();
       // await getViewOrder();
       // logger('get data from storage successfully');
     } catch (e) {
@@ -85,21 +85,21 @@ class SecureStorageService {
     return storage.read(key: primaryColorKey);
   }
 
-  // setMode(var newValue) async {
-  //   isDarkMode = newValue;
-  //   await storage.write(key: "isDark", value: isDarkMode.toString());
-  // }
+  setMode(var newValue) async {
+    isDarkMode = newValue;
+    await storage.write(key: "isDark", value: isDarkMode.toString());
+  }
 
   // setViewOrder(var newValue) async {
   //   viewOrder = newValue;
   //   await storage.write(key: "viewOrder", value: viewOrder.toString());
   // }
 
-  // getMode() async {
-  //   final val = (await storage.read(key: "isDark"));
+  getMode() async {
+    final val = (await storage.read(key: "isDark"));
 
-  //   isDarkMode = ValidatorService.checkBool(val);
-  // }
+    isDarkMode = ValidatorService.checkBool(val);
+  }
 
   // getViewOrder() async {
   //   viewOrder =

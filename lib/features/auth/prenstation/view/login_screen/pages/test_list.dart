@@ -23,58 +23,41 @@ class _CustomersListWidgetState extends State<CustomersListWidget> {
         showMessage: ShowMessageEnum.showBothToast);
   }
 
-  @override
-  void initState() {
-    getItClient<CustomersCubit>().getData(
-        showMessage: ShowMessageEnum.showBothToast,
-        source: DataSource.checkNetwork);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: BlocConsumer<CustomersCubit, CustomersState>(
-          listener: (context, status) {},
-          builder: (context, status) {
-            if (status is LoadingCustomersState || status is CustomersInitial) {
-              return const LoadingWidget();
-            } else if (status is ErrorCustomersState) {
-              return FailureScreen(failure: status.failure, onRefresh: refresh);
-            } else if (status is EmptyCustomersState) {
-              return NoDataFound(
-                  onPress: refresh,
-                  text: Trans.noDataFound.trans(context: context));
-            } else if (status is LoadedCustomersState) {
-              return Column(
-                children: [
-                  Expanded(
-                      child: RefreshIndicator(
-                          onRefresh: refresh,
-                          child: Scrollbar(
-                              child: CustomerWidget(
-                            model: status.data,
-                          )
-                              // child: MasonryGridView.count(
-                              //   crossAxisCount:
-                              //       getCustomerAxisCount(context.width),
-                              //   crossAxisSpacing: 10,
-                              //   mainAxisSpacing: 10,
-                              //   physics: const BouncingScrollPhysics(
-                              //       parent: AlwaysScrollableScrollPhysics()),
-                              //   itemCount: status.data.length,
-                              //   itemBuilder: (BuildContext context, int index) {
-                              //     return CustomerWidget(
-                              //         isAll: false, model: status.data[index]);
-                              //   },
-                              // ),
-                              ))),
-                ],
-              );
-            } else {
-              return const LoadingWidget();
-            }
-          }),
+    return Scaffold(
+      body: BlocConsumer<CustomersCubit, CustomersState>(
+        listener: (context, status) {},
+        builder: (context, status) {
+          if (status is LoadingCustomersState || status is CustomersInitial) {
+            return const LoadingWidget();
+          } else if (status is ErrorCustomersState) {
+            return FailureScreen(failure: status.failure, onRefresh: refresh);
+          } else if (status is EmptyCustomersState) {
+            return NoDataFound(
+                onPress: refresh,
+                text: Trans.noDataFound.trans(context: context));
+          } else if (status is LoadedCustomersState) {
+            return RefreshIndicator(
+              onRefresh: refresh,
+              child: Scrollbar(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: CustomerWidget(
+                        model: status.data,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return const LoadingWidget();
+          }
+        },
+      ),
     );
   }
 }

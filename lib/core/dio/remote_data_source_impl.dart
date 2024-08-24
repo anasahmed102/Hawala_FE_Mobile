@@ -570,7 +570,7 @@ class RemoteDataSourceImp implements RemoteDataSourceAbs {
     if (showMessageEnum.successAlert) {
       await successAlert(message: message.toString());
     } else if (showMessageEnum.successToast) {
-      showSuccessFlashBar(message.toString());
+      // showSuccessFlashBar(message.toString());
     }
   }
 }

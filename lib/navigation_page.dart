@@ -4,15 +4,17 @@ import 'package:hawala/features/auth/prenstation/view/login_screen/pages/test_li
 import 'package:hawala/features/customer/presentation/cubit/customers_cubit.dart';
 import 'package:hawala/features/hawala/presentation/cubit/hawala_cubit.dart';
 import 'package:hawala/features/hawala/presentation/view/pages/hawala_list.dart';
+import 'package:hawala/service/data_formatting_service.dart';
 import 'package:hawala/service/injection/injection.dart';
 import 'package:hawala/service/profile_notifier_service.dart';
 import 'package:hawala/shared/context_extension.dart';
 import 'package:hawala/shared/enums.dart';
 import 'package:hawala/shared/responsive.dart';
-import 'package:hawala/views/pages/add_hawala.dart';
 import 'package:hawala/views/pages/hawalaw_add_state.dart';
+import 'package:hawala/views/pages/hrkn.test.dart';
 
 late TextEditingController _username;
+DateTime now = DateTime.now();
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -31,6 +33,8 @@ class _NavigationPageState extends State<NavigationPage> {
         showMessage: ShowMessageEnum.showBothToast,
         source: DataSource.checkNetwork);
     getItClient<HawalaCubit>().getData(
+        endDate: getItClient<DateFormatterService>().getEndOfDayUTC(now),
+        startDate: getItClient<DateFormatterService>().getStartOfDayUTC(now),
         showMessage: ShowMessageEnum.showBothToast,
         source: DataSource.checkNetwork);
     super.initState();
@@ -50,7 +54,8 @@ class _NavigationPageState extends State<NavigationPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-     Navigator.push(context, MaterialPageRoute(builder: (_)=> HawalaAddListWidget()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => const HawalaAddListWidget()));
         },
         child: const Icon(
           Icons.add,
@@ -104,7 +109,7 @@ class _NavigationPageState extends State<NavigationPage> {
   static final List<Widget> _widgetOptions = <Widget>[
     const HawalaListWidget(),
     const CustomersListWidget(),
-    const Text("data"),
+    const DropdownMenuSample(),
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,

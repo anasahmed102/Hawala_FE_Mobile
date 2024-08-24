@@ -31,6 +31,24 @@ class HawalaAddUpdateDeleteCubit extends Cubit<HawalaAddUpdateDeleteState> {
         failureOrDoneMessage, "Fav Book Added Sucesfully"));
     return failureOrDoneMessage;
   }
+    Future<Either<Failure, bool>> deleteHawala(int? customerId) async {
+    emit(LoadingAddDeleteUpadateCustomerState());
+    final failureOrDoneMessage =
+        await hawalaRepository.delete(id: customerId);
+
+    emit(_eitherDoneMessageOrErrorState(
+        failureOrDoneMessage, "Fav Book Added Sucesfully"));
+    return failureOrDoneMessage;
+  }
+
+  HawalaAddUpdateDeleteState _eitherDoneMessageOrErrorState(
+      Either<Failure, bool> either, String message) {
+    return either.fold(
+      (failure) => ErrorAddDeleteUpadateHawalaState(
+          message: _mapFailureTomessage(failure)),
+      (_) => MessageAddDeleteUpadateHawalaState(message: message),
+    );
+  }
 
    HawalaAddUpdateDeleteState _eitherDoneMessageOrErrorStatee(
       Either<Failure, HawalaModel?> either, String message) {

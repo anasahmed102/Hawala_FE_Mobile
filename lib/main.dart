@@ -18,6 +18,7 @@ import 'package:hawala/shared/logger.dart';
 import 'package:hawala/shared/responsive.dart';
 import 'package:hawala/splash_screen.dart';
 import 'package:hawala/theme/app_theme.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -39,24 +40,27 @@ class MyApp extends StatelessWidget {
         providers: _providers(),
         child: Consumer<AppConfigurationService>(
           builder: (context, value, child) {
-            return MaterialApp(
-              localizationsDelegates: localizationsDelegates,
-              supportedLocales: supportedLocales,
-              locale: getLocale(value.language),
-              themeMode: value.themeMode(),
-              theme: ThemeApp.lightTheme(context),
-              darkTheme: ThemeApp.darkTheme(),
-              debugShowCheckedModeBanner: false,
-              navigatorKey: getItClient<AppConfigurationService>().navigatorKey,
-              home: const SplashScreen(),
-              builder: (context, child) {
-                Responsive.init(
-                  context,
-                  designSize: const Size(414, 896),
-                );
+            return OverlaySupport.global(
+              child: MaterialApp(
+                localizationsDelegates: localizationsDelegates,
+                supportedLocales: supportedLocales,
+                locale: getLocale(value.language),
+                themeMode: value.themeMode(),
+                theme: ThemeApp.lightTheme(context),
+                darkTheme: ThemeApp.darkTheme(),
+                debugShowCheckedModeBanner: false,
+                navigatorKey:
+                    getItClient<AppConfigurationService>().navigatorKey,
+                home: const SplashScreen(),
+                builder: (context, child) {
+                  Responsive.init(
+                    context,
+                    designSize: const Size(414, 896),
+                  );
 
-                return child!;
-              },
+                  return child!;
+                },
+              ),
             );
           },
         ),

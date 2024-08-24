@@ -274,7 +274,7 @@ class LocalDataSourceImp implements ILocalDataSource {
     if (showMessageEnum.successAlert) {
       successAlert(message: message.toString());
     } else if (showMessageEnum.successToast) {
-      showSuccessFlashBar(message.toString());
+      // showSuccessFlashBar(message.toString());
     }
   }
 

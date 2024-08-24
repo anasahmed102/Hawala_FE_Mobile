@@ -29,6 +29,7 @@ class CustomersCubit extends Cubit<CustomersState> {
     result.fold(
       (failure) => emit(ErrorCustomersState(failure: failure)),
       (data) {
+        logger(data);
         emit(_mapPropsToState(data));
       },
     );

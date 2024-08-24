@@ -25,8 +25,8 @@ class _HawalaAddListWidgetState extends State<HawalaAddListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: BlocConsumer<CustomersCubit, CustomersState>(
+    return Scaffold(
+      body: BlocConsumer<CustomersCubit, CustomersState>(
           listener: (context, status) {},
           builder: (context, status) {
             if (status is LoadingCustomersState || status is CustomersInitial) {
@@ -38,6 +38,9 @@ class _HawalaAddListWidgetState extends State<HawalaAddListWidget> {
                   onPress: refresh,
                   text: Trans.noDataFound.trans(context: context));
             } else if (status is LoadedCustomersState) {
+              // return AddHawala(
+              //   model: status.data,
+              // );
               return AddHawala(
                 model: status.data,
               );

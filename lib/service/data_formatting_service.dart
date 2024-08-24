@@ -76,7 +76,9 @@ class DateFormatterService {
     DateTime now = DateTime.now().toUtc();
     return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(now);
   }
-
+  String formatDateTimeUTC(DateTime dateTime) {
+    return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime.toUtc());
+  }
 
   static String getOnlyDate(DateTime? date) {
     if (date == null) {

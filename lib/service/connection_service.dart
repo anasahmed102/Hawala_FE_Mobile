@@ -42,7 +42,7 @@ class ConnectionService with ChangeNotifier {
     if (!connected) {
       showFailedFlashBar("internetConnectionWasLost");
     } else {
-      showSuccessFlashBar("internetConnectionWasBack");
+      // showSuccessFlashBar("internetConnectionWasBack"); 
     }
   }
 

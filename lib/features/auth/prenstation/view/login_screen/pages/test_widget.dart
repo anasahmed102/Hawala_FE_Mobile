@@ -9,6 +9,7 @@ import 'package:hawala/shared/responsive.dart';
 
 late TextEditingController _username;
 late TextEditingController _phoneNumber;
+
 Future<void> refresh() async {
   await getItClient<CustomersCubit>().getData(
       source: DataSource.checkNetwork,
@@ -19,11 +20,9 @@ class CustomerWidget extends StatefulWidget {
   const CustomerWidget({
     super.key,
     required this.model,
-    // required this.customers,
   });
 
   final List<CustomersModel> model;
-  // final List<CustomersModel> customers;
 
   @override
   _CustomerWidgetState createState() => _CustomerWidgetState();
@@ -139,122 +138,122 @@ class _CustomerWidgetState extends State<CustomerWidget> {
                 icon: const Icon(Icons.add))
           ],
         ),
-        ListView.builder(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          itemCount: widget.model.length,
-          itemBuilder: (context, index) {
-            return ListTile(
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemCount: widget.model.length,
+            itemBuilder: (context, index) {
+              return ListTile(
                 subtitle: Text(widget.model[index].phone),
                 leading: Text(widget.model[index].id.toString()),
                 title: Text(widget.model[index].customerName),
-                trailing: Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      PopupMenuButton<String>(
-                        onSelected: (String value) {
-                          if (value == 'remove') {
-                            getItClient<AddUpdateDeleteCustomerCubit>()
-                                .deleteCustomer(widget.model[index].id);
-                          } else if (value == 'edit') {
-                            // Pre-fill the TextField with the current customer name
-                            _username.text = widget.model[index].customerName;
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    PopupMenuButton<String>(
+                      onSelected: (String value) {
+                        if (value == 'remove') {
+                          getItClient<AddUpdateDeleteCustomerCubit>()
+                              .deleteCustomer(widget.model[index].id);
+                        } else if (value == 'edit') {
+                          // Pre-fill the TextField with the current customer name
+                          _username.text = widget.model[index].customerName;
 
-                            showDialog(
-                              context: context,
-                              builder: (_) => AlertDialog(
-                                title: const Text("Edit Customer"),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: TextField(
-                                        controller: _username,
-                                        decoration: const InputDecoration(
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(16)),
-                                          ),
-                                          filled: true,
-                                          prefixIcon: Icon(
-                                            Icons.task,
-                                          ),
-                                          labelText: "Customer name",
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: const Text("Edit Customer"),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      controller: _username,
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(16)),
+                                        ),
+                                        filled: true,
+                                        prefixIcon: Icon(
+                                          Icons.task,
+                                        ),
+                                        labelText: "Customer name",
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.31,
+                                    child: MaterialButton(
+                                      color: context.primaryColor,
+                                      onPressed: () {
+                                        final model = CustomersModel(
+                                          phone: widget.model[index].phone,
+                                          id: widget.model[index].id,
+                                          customerName:
+                                              _username.text, // Updated name
+                                        );
+                                        getItClient<
+                                                AddUpdateDeleteCustomerCubit>()
+                                            .updateCustomer(model);
+
+                                        // Close the dialog after updating
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.update,
+                                              color: Colors.white,
+                                            ),
+                                            SizedBox(width: 10),
+                                            Text(
+                                              "Update",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.31,
-                                      child: MaterialButton(
-                                        color: context.primaryColor,
-                                        onPressed: () {
-                                          final model = CustomersModel(
-                                            phone: widget.model[index].phone,
-                                            id: widget.model[index].id,
-                                            customerName:
-                                                _username.text, // Updated name
-                                          );
-                                          getItClient<
-                                                  AddUpdateDeleteCustomerCubit>()
-                                              .updateCustomer(model);
-
-                                          // Close the dialog after updating
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Center(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.update,
-                                                color: Colors.white,
-                                              ),
-                                              SizedBox(width: 10),
-                                              Text(
-                                                "Update",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  )
+                                ],
                               ),
-                            );
-                          }
-                        },
-                        itemBuilder: (BuildContext context) =>
-                            <PopupMenuEntry<String>>[
-                          const PopupMenuItem<String>(
-                            value: 'remove',
-                            child: ListTile(
-                              leading: Icon(Icons.delete),
-                              title: Text('Remove'),
                             ),
+                          );
+                        }
+                      },
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuEntry<String>>[
+                        const PopupMenuItem<String>(
+                          value: 'remove',
+                          child: ListTile(
+                            leading: Icon(Icons.delete),
+                            title: Text('Remove'),
                           ),
-                          const PopupMenuItem<String>(
-                            value: 'edit',
-                            child: ListTile(
-                              leading: Icon(Icons.edit),
-                              title: Text('Edit'),
-                            ),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'edit',
+                          child: ListTile(
+                            leading: Icon(Icons.edit),
+                            title: Text('Edit'),
                           ),
-                        ],
-                        icon: const Icon(Icons.more_vert), // Three dots icon
-                      ),
-                    ],
-                  ),
-                ));
-          },
+                        ),
+                      ],
+                      icon: const Icon(Icons.more_vert), // Three dots icon
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ],
     );
